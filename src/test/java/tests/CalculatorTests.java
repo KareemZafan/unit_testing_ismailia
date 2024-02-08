@@ -9,6 +9,8 @@ import org.junit.jupiter.api.condition.EnabledOnJre;
 import org.junit.jupiter.api.condition.EnabledOnOs;
 import org.junit.jupiter.api.condition.JRE;
 import org.junit.jupiter.api.condition.OS;
+import org.junit.jupiter.api.parallel.Execution;
+import org.junit.jupiter.api.parallel.ExecutionMode;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvFileSource;
@@ -19,6 +21,7 @@ import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@Execution(ExecutionMode.CONCURRENT)
 public class CalculatorTests {
 
     private Calculator calculator;
@@ -41,7 +44,7 @@ public class CalculatorTests {
     }
 
     @Test
-    @Disabled
+    //@Disabled
     void testSumFunctionality() {
         assertEquals(30, calculator.sum(20, 10));
         assertEquals(-30, calculator.sum(-20, -10));
@@ -56,13 +59,13 @@ public class CalculatorTests {
     }
 
     @Test
-    @EnabledOnOs(OS.WINDOWS)
+    @EnabledOnOs(OS.LINUX)
     void testDivisionFunctionality() {
         Exception exp = assertThrowsExactly(ArithmeticException.class, () -> calculator.divide(2, 0));
         assertEquals("Dividing By Zero", exp.getMessage());
         assertEquals(20, calculator.divide(40, 2));
         assertEquals(-20, calculator.divide(40, -2));
-
+        assertEquals(0,calculator.divide(0,100));
     }
 
     @Test

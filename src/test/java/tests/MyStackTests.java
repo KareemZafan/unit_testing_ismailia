@@ -2,6 +2,9 @@ package tests;
 
 import org.iti.mobile.MyStack;
 import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.extension.Extensions;
+import org.junit.jupiter.api.parallel.Execution;
+import org.junit.jupiter.api.parallel.ExecutionMode;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -9,6 +12,7 @@ import java.util.concurrent.TimeUnit;
 import static org.junit.jupiter.api.Assertions.*;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+@Execution(ExecutionMode.CONCURRENT)
 public class MyStackTests {
 
     private MyStack myStack;
